@@ -1,0 +1,5 @@
+mellow
+mellow.db
+mellow.db-wal
+mellow.db-shm
+*.db

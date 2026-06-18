@@ -1,0 +1,145 @@
+package templates
+
+import (
+	"fmt"
+
+	"github.com/eduvhc/mellow/internal/navidrome"
+)
+
+type SearchPageData struct {
+	Query           string
+	AlbumResults    []navidrome.Child
+	TrackResults    []navidrome.Child
+	ProviderResults []ProviderSearchResult
+}
+
+type ProviderSearchResult struct {
+	ID       string
+	Title    string
+	Artist   string
+	Album    string
+	Duration string
+	Quality  string
+	Source   string
+	Filename string
+	FileSize int64
+	Username string
+}
+
+templ SearchPage(data SearchPageData) {
+	@Layout(TabSearch, "Search", "Find music on Soulseek and more") {
+		<form
+			class="search-bar"
+			hx-post="/api/search"
+			hx-target="#search-results"
+			hx-swap="innerHTML"
+			hx-trigger="submit"
+		>
+			<svg style="width:20px; height:20px; color:#888888; flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+			<input type="text" name="query" placeholder="Artist, album, or track..." value={ data.Query }/>
+		</form>
+		<div class="provider-tabs">
+			<button class="provider-tab active" type="button">All</button>
+			<button class="provider-tab inactive" type="button">Soulseek</button>
+			<button class="provider-tab inactive" type="button">Library</button>
+		</div>
+		<div id="search-results">
+			if data.Query != "" {
+				@SearchResults(data)
+			}
+		</div>
+	}
+}
+
+templ SearchResults(data SearchPageData) {
+	<div style="display:flex; flex-direction:column; gap:16px;">
+		<span class="section-header">Results for '{ data.Query }'</span>
+		if len(data.AlbumResults) > 0 {
+			<div style="display:flex; justify-content:space-between; align-items:center;">
+				<span style="font-size:15px; font-weight:600; color:#1A1A1A;">Albums</span>
+				<a href="#" style="font-size:13px; color:#4A9FD8; text-decoration:none;">See all</a>
+			</div>
+			<div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:4px;">
+				for _, album := range data.AlbumResults {
+					@AlbumCard(album.Name, "")
+				}
+			</div>
+		}
+		if len(data.TrackResults) > 0 {
+			<div style="display:flex; justify-content:space-between; align-items:center;">
+				<span style="font-size:15px; font-weight:600; color:#1A1A1A;">Tracks</span>
+				<a href="#" style="font-size:13px; color:#4A9FD8; text-decoration:none;">See all</a>
+			</div>
+			<div style="display:flex; flex-direction:column; gap:8px;">
+				for _, track := range data.TrackResults {
+					@TrackCard(track.Title, track.Artist, "FLAC", formatDuration(track.Duration), BadgeColorQuality, false, "")
+				}
+			</div>
+		}
+		if len(data.ProviderResults) > 0 {
+			<div style="display:flex; justify-content:space-between; align-items:center;">
+				<span style="font-size:15px; font-weight:600; color:#1A1A1A;">Soulseek Results</span>
+			</div>
+			<div style="display:flex; flex-direction:column; gap:8px;">
+				for _, r := range data.ProviderResults {
+					<div style="display:flex; align-items:center; gap:12px; width:100%;">
+						<div style="width:40px; height:40px; border-radius:6px; background-color:#F7F8FA; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+							<svg style="width:16px; height:16px; color:#888888;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+						</div>
+						<div style="display:flex; flex-direction:column; gap:2px; flex:1; min-width:0;">
+							<span style="font-family:Inter,sans-serif; font-size:14px; font-weight:500; color:#1A1A1A; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{ r.Title }</span>
+							if r.Quality != "" {
+								@Badge(r.Quality, qualityColor(r.Quality))
+							}
+							<span style="font-family:Inter,sans-serif; font-size:12px; color:#666666;">{ r.Artist }</span>
+							<div style="display:flex; align-items:center; gap:6px;">
+								@Badge(r.Source, BadgeColorSoulseek)
+							</div>
+						</div>
+						<div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+							<span style="font-family:Inter,sans-serif; font-size:12px; color:#888888;">{ r.Duration }</span>
+							<form
+								hx-post={ fmt.Sprintf("/api/download/%s", r.Source) }
+								hx-target="closest div"
+								hx-swap="outerHTML"
+								hx-trigger="submit"
+								style="display:contents;"
+							>
+								<input type="hidden" name="id" value={ r.ID }/>
+								<input type="hidden" name="filename" value={ r.Filename }/>
+								<input type="hidden" name="size" value={ fmt.Sprintf("%d", r.FileSize) }/>
+								<input type="hidden" name="username" value={ r.Username }/>
+								<button
+									type="submit"
+									style="width:32px; height:32px; border-radius:9999px; background-color:#4A9FD8; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;"
+								>
+									<svg style="width:14px; height:14px; color:#FFFFFF;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								</button>
+							</form>
+						</div>
+					</div>
+				}
+			</div>
+		}
+		if len(data.AlbumResults) == 0 && len(data.TrackResults) == 0 && len(data.ProviderResults) == 0 {
+			<span style="font-family:Inter,sans-serif; font-size:14px; color:#888888;">No results found</span>
+		}
+	</div>
+}
+
+func qualityColor(q string) BadgeColor {
+	switch q {
+	case "flac", "flac 16/44.1", "flac 24/44.1", "flac 24/96":
+		return BadgeColorQuality
+	case "mp3", "mp3 320":
+		return BadgeColorMP3
+	default:
+		return BadgeColorAlbum
+	}
+}
+
+func formatDuration(seconds int) string {
+	m := seconds / 60
+	s := seconds % 60
+	return fmt.Sprintf("%d:%02d", m, s)
+}

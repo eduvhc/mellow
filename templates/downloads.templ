@@ -1,0 +1,64 @@
+package templates
+
+import (
+	"fmt"
+
+	"github.com/eduvhc/mellow/internal/provider"
+)
+
+type DownloadsPageData struct {
+	Active      []provider.Download
+	Completed   []provider.Download
+}
+
+templ DownloadsPage(data DownloadsPageData) {
+	@Layout(TabDownloads, "Downloads", fmt.Sprintf("%d active · %d completed", len(data.Active), len(data.Completed))) {
+		<div style="display:flex; flex-direction:column; gap:12px;">
+			<span class="section-header">Active</span>
+			<div id="active-downloads" style="display:flex; flex-direction:column; gap:12px;" hx-get="/api/downloads/active" hx-trigger="every 5s" hx-swap="innerHTML">
+				for _, dl := range data.Active {
+					@DownloadCard(
+						dl.Result.Filename,
+						dl.Result.Artist,
+						TypeFromFilename(dl.Result.Filename),
+						dl.Result.Source,
+						dl.Progress,
+						fmt.Sprintf("%.1f MB/s", float64(dl.Speed)/1024/1024),
+						dl.Status.String(),
+						false,
+						false,
+					)
+				}
+			</div>
+		</div>
+		<div style="display:flex; flex-direction:column; gap:12px;">
+			<span class="section-header">Completed Today</span>
+			<div style="display:flex; flex-direction:column; gap:12px;">
+				for _, dl := range data.Completed {
+					@DownloadCard(
+						dl.Result.Filename,
+						dl.Result.Artist,
+						TypeFromFilename(dl.Result.Filename),
+						dl.Result.Source,
+						100,
+						"",
+						"completed",
+						true,
+						dl.Status == provider.StatusFailed,
+					)
+				}
+			</div>
+		</div>
+	}
+}
+
+func TypeFromFilename(filename string) string {
+	if len(filename) < 4 {
+		return "single"
+	}
+	ext := filename[len(filename)-4:]
+	if ext == ".mp3" || ext == "flac" || ext == ".ogg" || ext == ".m4a" {
+		return "single"
+	}
+	return "album"
+}

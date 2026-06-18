@@ -1,0 +1,23 @@
+package templates
+
+import (
+	"fmt"
+
+	"github.com/eduvhc/mellow/internal/provider"
+)
+
+templ ActiveDownloadsList(downloads []provider.Download) {
+	for _, dl := range downloads {
+		@DownloadCard(
+			dl.Result.Filename,
+			dl.Result.Artist,
+			TypeFromFilename(dl.Result.Filename),
+			dl.Result.Source,
+			dl.Progress,
+			fmt.Sprintf("%.1f MB/s", float64(dl.Speed)/1024/1024),
+			dl.Status.String(),
+			false,
+			false,
+		)
+	}
+}

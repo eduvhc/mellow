@@ -1,0 +1,144 @@
+package templates
+
+import (
+	"fmt"
+
+	"github.com/eduvhc/mellow/internal/provider"
+)
+
+type SettingsPageData struct {
+	Providers          []provider.Provider
+	NavidromeConnected bool
+	NavidromeURL       string
+	NavidromeUsername  string
+	StorageUsed        string
+	StorageTotal       string
+	StorageMusic       string
+	StorageCache       string
+	StorageFree        string
+	StoragePercent     int
+}
+
+templ SettingsPage(data SettingsPageData) {
+	@Layout(TabSettings, "Settings", "Configure providers and connections") {
+		<div style="display:flex; flex-direction:column; gap:12px;">
+			<span class="section-header">Providers</span>
+			for _, p := range data.Providers {
+				@SettingsProviderCard(p)
+			}
+		</div>
+		<div style="display:flex; flex-direction:column; gap:12px;">
+			<span class="section-header">Navidrome</span>
+			<div class="card" style="display:flex; flex-direction:column; gap:12px;">
+				<div style="display:flex; justify-content:space-between; align-items:center;">
+					<div style="display:flex; align-items:center; gap:12px;">
+						<div style="width:36px; height:36px; border-radius:8px; background-color:#4A9FD8; display:flex; align-items:center; justify-content:center;">
+							<svg style="width:18px; height:18px; color:#FFFFFF;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+						</div>
+                        <div style="display:flex; flex-direction:column; gap:2px;">
+                            <span style="font-size:15px; font-weight:600; color:#1A1A1A;">Navidrome</span>
+                            if data.NavidromeConnected {
+                                <span style="font-size:12px; color:#10B981;">Connected</span>
+                            } else {
+                                <span style="font-size:12px; color:#EF4444;">Disconnected</span>
+                            }
+                        </div>
+                    </div>
+                    if data.NavidromeConnected {
+                        <div style="width:51px; height:31px; border-radius:9999px; background-color:#10B981; padding:0 3px 0 22px; display:flex; align-items:center;">
+                            <div style="width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;"></div>
+                        </div>
+                    } else {
+                        <div style="width:51px; height:31px; border-radius:9999px; background-color:#E5E7EB; padding:0 22px 0 3px; display:flex; align-items:center;">
+                            <div style="width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;"></div>
+                        </div>
+                    }
+                </div>
+				<div style="display:flex; flex-direction:column; gap:4px;">
+					<label style="font-size:12px; color:#666666;">Server URL</label>
+					<div style="width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;">
+						<span style="font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;">{ data.NavidromeURL }</span>
+					</div>
+				</div>
+				<div style="display:flex; flex-direction:column; gap:4px;">
+					<label style="font-size:12px; color:#666666;">Username</label>
+					<div style="width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;">
+						<span style="font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;">{ data.NavidromeUsername }</span>
+					</div>
+				</div>
+				<div style="width:100%; height:40px; border-radius:8px; background-color:#4A9FD8; display:flex; align-items:center; justify-content:center;">
+					<span style="font-size:14px; font-weight:500; color:#FFFFFF; font-family:Inter,sans-serif;">Test Connection</span>
+				</div>
+			</div>
+		</div>
+		<div style="display:flex; flex-direction:column; gap:12px;">
+			<span class="section-header">Storage</span>
+			<div class="card" style="display:flex; flex-direction:column; gap:12px;">
+				<span style="font-size:14px; font-weight:600; color:#1A1A1A;">Music Library</span>
+				<div style="width:100%; height:8px; border-radius:4px; background-color:#E5E7EB; overflow:hidden;">
+					<div style={ fmt.Sprintf("width:%dpx; height:8px; border-radius:4px; background-color:#4A9FD8;", data.StoragePercent*245/100) }></div>
+				</div>
+				<div style="display:flex; justify-content:space-between;">
+					<span style="font-size:12px; color:#666666;">{ data.StorageUsed } used</span>
+					<span style="font-size:12px; color:#666666;">{ data.StorageTotal }</span>
+				</div>
+				<div style="display:flex; flex-direction:column; gap:8px;">
+					<div style="display:flex; justify-content:space-between; align-items:center;">
+						<div style="display:flex; align-items:center;">
+							<div style="width:8px; height:8px; border-radius:9999px; background-color:#4A9FD8; margin-right:8px;"></div>
+							<span style="font-size:12px; color:#666666;">Music files</span>
+						</div>
+						<span style="font-size:12px; font-weight:500; color:#1A1A1A;">{ data.StorageMusic }</span>
+					</div>
+					<div style="display:flex; justify-content:space-between; align-items:center;">
+						<div style="display:flex; align-items:center;">
+							<div style="width:8px; height:8px; border-radius:9999px; background-color:#10B981; margin-right:8px;"></div>
+							<span style="font-size:12px; color:#666666;">Metadata & cache</span>
+						</div>
+						<span style="font-size:12px; font-weight:500; color:#1A1A1A;">{ data.StorageCache }</span>
+					</div>
+					<div style="display:flex; justify-content:space-between; align-items:center;">
+						<div style="display:flex; align-items:center;">
+							<div style="width:8px; height:8px; border-radius:9999px; background-color:#E5E7EB; margin-right:8px;"></div>
+							<span style="font-size:12px; color:#666666;">Free space</span>
+						</div>
+						<span style="font-size:12px; font-weight:500; color:#1A1A1A;">{ data.StorageFree }</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+}
+
+templ SettingsProviderCard(p provider.Provider) {
+	<div class="card" style="display:flex; flex-direction:column; gap:12px;">
+		<div style="display:flex; justify-content:space-between; align-items:center;">
+			<div style="display:flex; align-items:center; gap:12px;">
+				<div style="width:36px; height:36px; border-radius:8px; background-color:#10B981; display:flex; align-items:center; justify-content:center;">
+					<svg style="width:18px; height:18px; color:#FFFFFF;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+				</div>
+				<div style="display:flex; flex-direction:column; gap:2px;">
+					<span style="font-size:15px; font-weight:600; color:#1A1A1A;">{ p.Name() }</span>
+                    <span style="font-size:12px; color:#10B981;">Enabled</span>
+                </div>
+            </div>
+            <div style="width:51px; height:31px; border-radius:9999px; background-color:#10B981; padding:0 3px 0 22px; display:flex; align-items:center;">
+                <div style="width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;"></div>
+            </div>
+        </div>
+		if len(p.Config().Fields) > 0 {
+			for _, field := range p.Config().Fields {
+				<div style="display:flex; flex-direction:column; gap:4px;">
+					<label style="font-size:12px; color:#666666;">{ field.Label }</label>
+					<div style="width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;">
+						if field.Type == "password" {
+							<span style="font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;">••••••••</span>
+						} else {
+							<span style="font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;">{ field.Default }</span>
+						}
+					</div>
+				</div>
+			}
+		}
+	</div>
+}

@@ -1,0 +1,192 @@
+package templates
+
+import "fmt"
+
+templ Layout(activeTab Tab, title, subtitle string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+			<title>mellow — { title }</title>
+			<link rel="preconnect" href="https://fonts.googleapis.com"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+			<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshBBF6rxB+myuH9TwrWMLgCE1J8d9wH7nT8jLO9n5yTFP5K5n5yTFP5" crossorigin="anonymous"></script>
+			<style>
+				* { margin: 0; padding: 0; box-sizing: border-box; }
+				body { font-family: 'Inter', sans-serif; background-color: #F7F8FA; color: #1A1A1A; }
+				.app-container {
+					max-width: 390px;
+					margin: 0 auto;
+					background-color: #FFFFFF;
+					min-height: 100vh;
+					position: relative;
+					padding-bottom: 80px;
+				}
+				.status-bar {
+					height: 62px;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					padding: 0 24px;
+					font-size: 15px;
+					font-weight: 600;
+				}
+				.content {
+					padding: 0 20px;
+					display: flex;
+					flex-direction: column;
+					gap: 24px;
+				}
+				.header-title {
+					font-size: 28px;
+					font-weight: 700;
+					color: #1A1A1A;
+				}
+				.header-subtitle {
+					font-size: 14px;
+					color: #666666;
+				}
+				.section-header {
+					font-size: 13px;
+					font-weight: 600;
+					color: #888888;
+					letter-spacing: 0.5px;
+					text-transform: uppercase;
+				}
+				.search-bar {
+					display: flex;
+					align-items: center;
+					gap: 12px;
+					padding: 0 16px;
+					height: 48px;
+					border-radius: 12px;
+					background-color: #F7F8FA;
+					border: none;
+					width: 100%;
+				}
+				.search-bar input {
+					border: none;
+					background: transparent;
+					font-size: 15px;
+					font-family: 'Inter', sans-serif;
+					color: #1A1A1A;
+					width: 100%;
+					outline: none;
+				}
+				.search-bar input::placeholder { color: #888888; }
+				.provider-tabs {
+					display: flex;
+					gap: 8px;
+				}
+				.provider-tab {
+					padding: 8px 16px;
+					border-radius: 9999px;
+					font-size: 13px;
+					font-weight: 500;
+					border: none;
+					cursor: pointer;
+					font-family: 'Inter', sans-serif;
+				}
+				.provider-tab.active {
+					background-color: #0A0A0A;
+					color: #FFFFFF;
+				}
+				.provider-tab.inactive {
+					background-color: #F7F8FA;
+					color: #666666;
+				}
+				.card {
+					border-radius: 12px;
+					background-color: #F7F8FA;
+					padding: 16px;
+				}
+				.form-field {
+					display: flex;
+					flex-direction: column;
+					gap: 4px;
+				}
+				.form-field label {
+					font-size: 12px;
+					color: #666666;
+					font-weight: 500;
+				}
+				.form-field input {
+					padding: 8px 12px;
+					border-radius: 8px;
+					border: 1px solid #E5E7EB;
+					font-size: 14px;
+					font-family: 'Inter', sans-serif;
+					background-color: #FFFFFF;
+				}
+				.btn-primary {
+					padding: 10px 16px;
+					border-radius: 8px;
+					background-color: #4A9FD8;
+					color: #FFFFFF;
+					border: none;
+					font-size: 14px;
+					font-weight: 500;
+					font-family: 'Inter', sans-serif;
+					cursor: pointer;
+					width: 100%;
+				}
+				.btn-primary:hover { background-color: #3B8EC8; }
+				.toggle {
+					width: 44px;
+					height: 24px;
+					border-radius: 12px;
+					background-color: #10B981;
+					position: relative;
+					cursor: pointer;
+				}
+				.toggle::after {
+					content: '';
+					position: absolute;
+					width: 20px;
+					height: 20px;
+					border-radius: 50%;
+					background-color: #FFFFFF;
+					top: 2px;
+					right: 2px;
+				}
+				.toggle.off {
+					background-color: #E5E7EB;
+				}
+				.toggle.off::after {
+					left: 2px;
+					right: auto;
+				}
+				.progress-bar {
+					width: 100%;
+					height: 8px;
+					border-radius: 4px;
+					background-color: #E5E7EB;
+					overflow: hidden;
+				}
+				.progress-fill {
+					height: 8px;
+					border-radius: 4px;
+					background-color: #4A9FD8;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="app-container">
+				<div class="status-bar">
+					<span>{ fmt.Sprintf("%02d:%02d", 9, 41) }</span>
+					<span>85%</span>
+				</div>
+				<div class="content">
+					<div style="display:flex; flex-direction:column; gap:4px;">
+						<h1 class="header-title">{ title }</h1>
+						<p class="header-subtitle">{ subtitle }</p>
+					</div>
+					{ children... }
+				</div>
+				@TabBar(activeTab)
+			</div>
+		</body>
+	</html>
+}

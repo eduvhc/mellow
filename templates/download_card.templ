@@ -1,0 +1,45 @@
+package templates
+
+import "fmt"
+
+templ DownloadCard(title, detail, downloadType, provider string, progress float64, speed string, status string, isCompleted bool, isFailed bool) {
+	<div style="border-radius:12px; background-color:#F7F8FA; padding:12px; display:flex; flex-direction:column; gap:8px;">
+		<div style="display:flex; align-items:center; gap:8px; justify-content:space-between;">
+			<div style="display:flex; align-items:center; gap:12px; flex:1;">
+				<div style="width:40px; height:40px; border-radius:6px; background-color:#E5E7EB; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+					<svg style="width:16px; height:16px; color:#888888;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+				</div>
+				<div style="display:flex; flex-direction:column; gap:2px; flex:1; min-width:0;">
+					<span style="font-family:Inter,sans-serif; font-size:14px; font-weight:500; color:#1A1A1A; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{ title }</span>
+					<span style="font-family:Inter,sans-serif; font-size:12px; color:#666666;">{ detail }</span>
+					<div style="display:flex; align-items:center; gap:6px;">
+						@Badge(provider, BadgeColorProvider)
+						if downloadType == "album" {
+							@Badge("ALBUM", BadgeColorAlbum)
+						} else if downloadType == "single" {
+							@Badge("SINGLE", BadgeColorSingle)
+						}
+					</div>
+				</div>
+			</div>
+			if isCompleted {
+				<div style="width:32px; height:32px; border-radius:9999px; background-color:#10B981; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+					<svg style="width:14px; height:14px; color:#FFFFFF;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+				</div>
+			} else if isFailed {
+				<div style="width:32px; height:32px; border-radius:9999px; background-color:#EF4444; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+					<svg style="width:14px; height:14px; color:#FFFFFF;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+				</div>
+			}
+		</div>
+		if !isCompleted && !isFailed {
+			<div style="width:100%; height:4px; border-radius:2px; background-color:#E5E7EB; overflow:hidden;">
+				<div style={ fmt.Sprintf("width:%.0f%%; height:4px; border-radius:2px; background-color:#4A9FD8;", progress) }></div>
+			</div>
+			<div style="display:flex; justify-content:space-between;">
+				<span style="font-family:Inter,sans-serif; font-size:12px; color:#888888;">{ speed }</span>
+				<span style="font-family:Inter,sans-serif; font-size:12px; color:#4A9FD8; font-weight:500;">{ fmt.Sprintf("%.0f%%", progress) }</span>
+			</div>
+		}
+	</div>
+}

@@ -1,0 +1,56 @@
+package templates
+
+import "fmt"
+
+type Tab string
+
+const (
+	TabSearch    Tab = "search"
+	TabLibrary   Tab = "library"
+	TabDownloads Tab = "downloads"
+	TabSettings  Tab = "settings"
+)
+
+templ TabBar(active Tab) {
+	<div style="position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:390px; height:80px; background-color:#FFFFFF; border-top:1px solid #E5E7EB; display:flex; justify-content:space-around; align-items:flex-start; padding:15px 16px 12px; z-index:100;">
+		@tabItem("search", "Search", "search", active == TabSearch)
+		@tabItem("library", "Library", "library", active == TabLibrary)
+		@tabItem("downloads", "Downloads", "download", active == TabDownloads)
+		@tabItem("settings", "Settings", "settings", active == TabSettings)
+	</div>
+}
+
+templ tabItem(name, label, icon string, isActive bool) {
+	<a
+		href={ fmt.Sprintf("/%s", name) }
+		style="display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none;"
+	>
+		<svg
+			style={ fmt.Sprintf("width:22px; height:22px; color:%s;", ternary(isActive, "#4A9FD8", "#888888")) }
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			if icon == "search" {
+				<circle cx="11" cy="11" r="8"></circle>
+				<path d="m21 21-4.3-4.3"></path>
+			} else if icon == "library" {
+				<path d="m16 6 4 14"></path>
+				<path d="M12 6v14"></path>
+				<path d="M2 19.6V4.4C2 3.6 2.7 3 3.5 3h3c.8 0 1.5.6 1.5 1.4v15.2c0 .8-.7 1.4-1.5 1.4h-3c-.8 0-1.5-.6-1.5-1.4Z"></path>
+				<path d="M8 19.6V4.4C8 3.6 8.7 3 9.5 3h3c.8 0 1.5.6 1.5 1.4v15.2c0 .8-.7 1.4-1.5 1.4h-3c-.8 0-1.5-.6-1.5-1.4Z"></path>
+			} else if icon == "download" {
+				<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+				<polyline points="7 10 12 15 17 10"></polyline>
+				<line x1="12" y1="15" x2="12" y2="3"></line>
+			} else if icon == "settings" {
+				<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+				<circle cx="12" cy="12" r="3"></circle>
+			}
+		</svg>
+		<span style={ fmt.Sprintf("font-family:Inter,sans-serif; font-size:10px; color:%s; font-weight:%s;", ternary(isActive, "#4A9FD8", "#888888"), ternary(isActive, "600", "normal")) }>{ label }</span>
+	</a>
+}
