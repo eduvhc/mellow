@@ -1,4 +1,5 @@
 mellow
+mellow-linux-amd64
 mellow.db
 mellow.db-wal
 mellow.db-shm
