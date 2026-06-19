@@ -43,6 +43,10 @@ func New(cfg Config) *Client {
 
 // --- API response types ---
 
+type apiEnvelope struct {
+	Response subsonicResponse `json:"subsonic-response"`
+}
+
 type subsonicResponse struct {
 	Status  string          `json:"status"`
 	Version string          `json:"version"`
@@ -225,24 +229,26 @@ func (c *Client) get(ctx context.Context, endpoint string, extra url.Values, out
 	}
 	defer resp.Body.Close()
 
-	if out == nil {
-		return nil
-	}
-
 	b, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return err
 	}
 
-	if err := json.Unmarshal(b, out); err != nil {
+	var env apiEnvelope
+	if err := json.Unmarshal(b, &env); err != nil {
 		return fmt.Errorf("navidrome: decode %s: %w", endpoint, err)
 	}
 
-	if out.Error != nil {
-		return fmt.Errorf("navidrome: %s: %s (code %d)", endpoint, out.Error.Message, out.Error.Code)
+	inner := env.Response
+	if inner.Error != nil {
+		return fmt.Errorf("navidrome: %s: %s (code %d)", endpoint, inner.Error.Message, inner.Error.Code)
 	}
-	if out.Status != "ok" {
-		return fmt.Errorf("navidrome: %s: status %s", endpoint, out.Status)
+	if inner.Status != "ok" {
+		return fmt.Errorf("navidrome: %s: status %s", endpoint, inner.Status)
+	}
+
+	if out != nil {
+		*out = inner
 	}
 	return nil
 }

@@ -3,6 +3,7 @@ package ui
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"strconv"
 	"sync"
@@ -143,8 +144,7 @@ func (h *Handler) DownloadsPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) SettingsPage(w http.ResponseWriter, r *http.Request) {
-	musicPath := h.cfg.Navidrome.BaseURL
-	storageUsed, storageTotal, storagePercent := diskUsage(musicPath)
+	storageUsed, storageTotal, storagePercent := diskUsage(h.cfg.Navidrome.MusicPath)
 
 	data := templates.SettingsPageData{
 		Providers:          h.registry.List(),
@@ -278,6 +278,15 @@ func (h *Handler) DownloadAPI(w http.ResponseWriter, r *http.Request) {
 	}
 
 	h.db.SaveDownload(id, providerName, filename, size)
+
+	if h.nd != nil {
+		go func() {
+			if err := h.nd.StartScan(context.Background()); err != nil {
+				slog.Warn("navidrome scan trigger failed", "error", err)
+			}
+		}()
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.Write([]byte(`{"status":"queued"}`))
 }
@@ -301,7 +310,7 @@ func (h *Handler) DownloadsActiveAPI(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) StorageAPI(w http.ResponseWriter, r *http.Request) {
-	used, total, _ := diskUsage(h.cfg.Navidrome.BaseURL)
+	used, total, _ := diskUsage(h.cfg.Navidrome.MusicPath)
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, `{"used":"%s","total":"%s"}`, used, total)
 }

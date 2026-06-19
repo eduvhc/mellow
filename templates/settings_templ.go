@@ -70,122 +70,141 @@ func SettingsPage(data SettingsPageData) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-            templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div style=\"display:flex; flex-direction:column; gap:12px;\"><span class=\"section-header\">Navidrome</span><div class=\"card\" style=\"display:flex; flex-direction:column; gap:12px;\"><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center; gap:12px;\"><div style=\"width:36px; height:36px; border-radius:8px; background-color:#4A9FD8; display:flex; align-items:center; justify-content:center;\"><svg style=\"width:18px; height:18px; color:#FFFFFF;\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18V5l12-2v13\"></path><circle cx=\"6\" cy=\"18\" r=\"3\"></circle><circle cx=\"18\" cy=\"16\" r=\"3\"></circle></svg></div><div style=\"display:flex; flex-direction:column; gap:2px;\"><span style=\"font-size:15px; font-weight:600; color:#1A1A1A;\">Navidrome</span>")
-            if templ_7745c5c3_Err != nil {
-                return templ_7745c5c3_Err
-            }
-            if data.NavidromeConnected {
-                templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " <span style=\"font-size:12px; color:#10B981;\">Connected</span></div></div><div style=\"width:51px; height:31px; border-radius:9999px; background-color:#10B981; padding:0 3px 0 22px; display:flex; align-items:center;\"><div style=\"width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;\"></div></div></div><div style=\"display:flex; flex-direction:column; gap:4px;\"><label style=\"font-size:12px; color:#666666;\">Server URL</label><div style=\"width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;\"><span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">")
-                if templ_7745c5c3_Err != nil {
-                    return templ_7745c5c3_Err
-                }
-            } else {
-                templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " <span style=\"font-size:12px; color:#EF4444;\">Disconnected</span></div></div><div style=\"width:51px; height:31px; border-radius:9999px; background-color:#E5E7EB; padding:0 22px 0 3px; display:flex; align-items:center;\"><div style=\"width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;\"></div></div></div><div style=\"display:flex; flex-direction:column; gap:4px;\"><label style=\"font-size:12px; color:#666666;\">Server URL</label><div style=\"width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;\"><span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">")
-                if templ_7745c5c3_Err != nil {
-                    return templ_7745c5c3_Err
-                }
-            }
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div style=\"display:flex; flex-direction:column; gap:12px;\"><span class=\"section-header\">Navidrome</span><div class=\"card\" style=\"display:flex; flex-direction:column; gap:12px;\"><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center; gap:12px;\"><div style=\"width:36px; height:36px; border-radius:8px; background-color:#4A9FD8; display:flex; align-items:center; justify-content:center;\"><svg style=\"width:18px; height:18px; color:#FFFFFF;\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18V5l12-2v13\"></path><circle cx=\"6\" cy=\"18\" r=\"3\"></circle><circle cx=\"18\" cy=\"16\" r=\"3\"></circle></svg></div><div style=\"display:flex; flex-direction:column; gap:2px;\"><span style=\"font-size:15px; font-weight:600; color:#1A1A1A;\">Navidrome</span> ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if data.NavidromeConnected {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<span style=\"font-size:12px; color:#10B981;\">Connected</span>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			} else {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<span style=\"font-size:12px; color:#EF4444;\">Disconnected</span>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if data.NavidromeConnected {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<div style=\"width:51px; height:31px; border-radius:9999px; background-color:#10B981; padding:0 3px 0 22px; display:flex; align-items:center;\"><div style=\"width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;\"></div></div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			} else {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<div style=\"width:51px; height:31px; border-radius:9999px; background-color:#E5E7EB; padding:0 22px 0 3px; display:flex; align-items:center;\"><div style=\"width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;\"></div></div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div><div style=\"display:flex; flex-direction:column; gap:4px;\"><label style=\"font-size:12px; color:#666666;\">Server URL</label><div style=\"width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;\"><span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(data.NavidromeURL)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 50, Col: 100}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 60, Col: 100}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</span></div></div><div style=\"display:flex; flex-direction:column; gap:4px;\"><label style=\"font-size:12px; color:#666666;\">Username</label><div style=\"width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;\"><span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</span></div></div><div style=\"display:flex; flex-direction:column; gap:4px;\"><label style=\"font-size:12px; color:#666666;\">Username</label><div style=\"width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;\"><span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(data.NavidromeUsername)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 56, Col: 105}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 66, Col: 105}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</span></div></div><div style=\"width:100%; height:40px; border-radius:8px; background-color:#4A9FD8; display:flex; align-items:center; justify-content:center;\"><span style=\"font-size:14px; font-weight:500; color:#FFFFFF; font-family:Inter,sans-serif;\">Test Connection</span></div></div></div><div style=\"display:flex; flex-direction:column; gap:12px;\"><span class=\"section-header\">Storage</span><div class=\"card\" style=\"display:flex; flex-direction:column; gap:12px;\"><span style=\"font-size:14px; font-weight:600; color:#1A1A1A;\">Music Library</span><div style=\"width:100%; height:8px; border-radius:4px; background-color:#E5E7EB; overflow:hidden;\"><div style=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</span></div></div><div style=\"width:100%; height:40px; border-radius:8px; background-color:#4A9FD8; display:flex; align-items:center; justify-content:center;\"><span style=\"font-size:14px; font-weight:500; color:#FFFFFF; font-family:Inter,sans-serif;\">Test Connection</span></div></div></div><div style=\"display:flex; flex-direction:column; gap:12px;\"><span class=\"section-header\">Storage</span><div class=\"card\" style=\"display:flex; flex-direction:column; gap:12px;\"><span style=\"font-size:14px; font-weight:600; color:#1A1A1A;\">Music Library</span><div style=\"width:100%; height:8px; border-radius:4px; background-color:#E5E7EB; overflow:hidden;\"><div style=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templruntime.SanitizeStyleAttributeValues(fmt.Sprintf("width:%dpx; height:8px; border-radius:4px; background-color:#4A9FD8;", data.StoragePercent*245/100))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 69, Col: 130}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 79, Col: 130}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\"></div></div><div style=\"display:flex; justify-content:space-between;\"><span style=\"font-size:12px; color:#666666;\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\"></div></div><div style=\"display:flex; justify-content:space-between;\"><span style=\"font-size:12px; color:#666666;\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(data.StorageUsed)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 72, Col: 68}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 82, Col: 68}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, " used</span> <span style=\"font-size:12px; color:#666666;\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, " used</span> <span style=\"font-size:12px; color:#666666;\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(data.StorageTotal)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 73, Col: 69}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 83, Col: 69}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</span></div><div style=\"display:flex; flex-direction:column; gap:8px;\"><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center;\"><div style=\"width:8px; height:8px; border-radius:9999px; background-color:#4A9FD8; margin-right:8px;\"></div><span style=\"font-size:12px; color:#666666;\">Music files</span></div><span style=\"font-size:12px; font-weight:500; color:#1A1A1A;\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "</span></div><div style=\"display:flex; flex-direction:column; gap:8px;\"><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center;\"><div style=\"width:8px; height:8px; border-radius:9999px; background-color:#4A9FD8; margin-right:8px;\"></div><span style=\"font-size:12px; color:#666666;\">Music files</span></div><span style=\"font-size:12px; font-weight:500; color:#1A1A1A;\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var8 string
 			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(data.StorageMusic)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 81, Col: 87}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 91, Col: 87}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</span></div><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center;\"><div style=\"width:8px; height:8px; border-radius:9999px; background-color:#10B981; margin-right:8px;\"></div><span style=\"font-size:12px; color:#666666;\">Metadata & cache</span></div><span style=\"font-size:12px; font-weight:500; color:#1A1A1A;\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "</span></div><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center;\"><div style=\"width:8px; height:8px; border-radius:9999px; background-color:#10B981; margin-right:8px;\"></div><span style=\"font-size:12px; color:#666666;\">Metadata & cache</span></div><span style=\"font-size:12px; font-weight:500; color:#1A1A1A;\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var9 string
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(data.StorageCache)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 88, Col: 87}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 98, Col: 87}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</span></div><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center;\"><div style=\"width:8px; height:8px; border-radius:9999px; background-color:#E5E7EB; margin-right:8px;\"></div><span style=\"font-size:12px; color:#666666;\">Free space</span></div><span style=\"font-size:12px; font-weight:500; color:#1A1A1A;\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "</span></div><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center;\"><div style=\"width:8px; height:8px; border-radius:9999px; background-color:#E5E7EB; margin-right:8px;\"></div><span style=\"font-size:12px; color:#666666;\">Free space</span></div><span style=\"font-size:12px; font-weight:500; color:#1A1A1A;\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var10 string
 			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(data.StorageFree)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 95, Col: 86}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 105, Col: 86}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</span></div></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "</span></div></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -220,73 +239,73 @@ func SettingsProviderCard(p provider.Provider) templ.Component {
 			templ_7745c5c3_Var11 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "<div class=\"card\" style=\"display:flex; flex-direction:column; gap:12px;\"><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center; gap:12px;\"><div style=\"width:36px; height:36px; border-radius:8px; background-color:#10B981; display:flex; align-items:center; justify-content:center;\"><svg style=\"width:18px; height:18px; color:#FFFFFF;\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon></svg></div><div style=\"display:flex; flex-direction:column; gap:2px;\"><span style=\"font-size:15px; font-weight:600; color:#1A1A1A;\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "<div class=\"card\" style=\"display:flex; flex-direction:column; gap:12px;\"><div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"display:flex; align-items:center; gap:12px;\"><div style=\"width:36px; height:36px; border-radius:8px; background-color:#10B981; display:flex; align-items:center; justify-content:center;\"><svg style=\"width:18px; height:18px; color:#FFFFFF;\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon></svg></div><div style=\"display:flex; flex-direction:column; gap:2px;\"><span style=\"font-size:15px; font-weight:600; color:#1A1A1A;\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 111, Col: 77}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 121, Col: 77}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-            templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "</span> <span style=\"font-size:12px; color:#10B981;\">Enabled</span></div></div><div style=\"width:51px; height:31px; border-radius:9999px; background-color:#10B981; padding:0 3px 0 22px; display:flex; align-items:center;\"><div style=\"width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;\"></div></div></div>")
-            if templ_7745c5c3_Err != nil {
-                return templ_7745c5c3_Err
-            }
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</span> <span style=\"font-size:12px; color:#10B981;\">Enabled</span></div></div><div style=\"width:51px; height:31px; border-radius:9999px; background-color:#10B981; padding:0 3px 0 22px; display:flex; align-items:center;\"><div style=\"width:25px; height:25px; border-radius:9999px; background-color:#FFFFFF;\"></div></div></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		if len(p.Config().Fields) > 0 {
 			for _, field := range p.Config().Fields {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "<div style=\"display:flex; flex-direction:column; gap:4px;\"><label style=\"font-size:12px; color:#666666;\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "<div style=\"display:flex; flex-direction:column; gap:4px;\"><label style=\"font-size:12px; color:#666666;\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var13 string
 				templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(field.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 122, Col: 64}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 132, Col: 64}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "</label><div style=\"width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</label><div style=\"width:100%; height:40px; border-radius:8px; border:1px solid #E5E7EB; background-color:#FFFFFF; padding:0 12px; display:flex; align-items:center;\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				if field.Type == "password" {
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "<span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">••••••••</span>")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">••••••••</span>")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 				} else {
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "<span style=\"font-size:14px; color:#1A1A1A; font-family:Inter,sans-serif;\">")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 					var templ_7745c5c3_Var14 string
 					templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(field.Default)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 127, Col: 97}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/settings.templ`, Line: 137, Col: 97}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "</span>")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "</span>")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</div></div>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "</div></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "</div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

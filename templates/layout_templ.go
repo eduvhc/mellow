@@ -8,8 +8,6 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "fmt"
-
 func Layout(activeTab Tab, title, subtitle string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -38,52 +36,39 @@ func Layout(activeTab Tab, title, subtitle string) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 11, Col: 28}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 9, Col: 28}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap\" rel=\"stylesheet\"><script src=\"https://unpkg.com/htmx.org@2.0.4\" integrity=\"sha384-HGfztofotfshBBF6rxB+myuH9TwrWMLgCE1J8d9wH7nT8jLO9n5yTFP5K5n5yTFP5\" crossorigin=\"anonymous\"></script><style>\n\t\t\t\t* { margin: 0; padding: 0; box-sizing: border-box; }\n\t\t\t\tbody { font-family: 'Inter', sans-serif; background-color: #F7F8FA; color: #1A1A1A; }\n\t\t\t\t.app-container {\n\t\t\t\t\tmax-width: 390px;\n\t\t\t\t\tmargin: 0 auto;\n\t\t\t\t\tbackground-color: #FFFFFF;\n\t\t\t\t\tmin-height: 100vh;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tpadding-bottom: 80px;\n\t\t\t\t}\n\t\t\t\t.status-bar {\n\t\t\t\t\theight: 62px;\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tjustify-content: space-between;\n\t\t\t\t\tpadding: 0 24px;\n\t\t\t\t\tfont-size: 15px;\n\t\t\t\t\tfont-weight: 600;\n\t\t\t\t}\n\t\t\t\t.content {\n\t\t\t\t\tpadding: 0 20px;\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tflex-direction: column;\n\t\t\t\t\tgap: 24px;\n\t\t\t\t}\n\t\t\t\t.header-title {\n\t\t\t\t\tfont-size: 28px;\n\t\t\t\t\tfont-weight: 700;\n\t\t\t\t\tcolor: #1A1A1A;\n\t\t\t\t}\n\t\t\t\t.header-subtitle {\n\t\t\t\t\tfont-size: 14px;\n\t\t\t\t\tcolor: #666666;\n\t\t\t\t}\n\t\t\t\t.section-header {\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tfont-weight: 600;\n\t\t\t\t\tcolor: #888888;\n\t\t\t\t\tletter-spacing: 0.5px;\n\t\t\t\t\ttext-transform: uppercase;\n\t\t\t\t}\n\t\t\t\t.search-bar {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tgap: 12px;\n\t\t\t\t\tpadding: 0 16px;\n\t\t\t\t\theight: 48px;\n\t\t\t\t\tborder-radius: 12px;\n\t\t\t\t\tbackground-color: #F7F8FA;\n\t\t\t\t\tborder: none;\n\t\t\t\t\twidth: 100%;\n\t\t\t\t}\n\t\t\t\t.search-bar input {\n\t\t\t\t\tborder: none;\n\t\t\t\t\tbackground: transparent;\n\t\t\t\t\tfont-size: 15px;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t\tcolor: #1A1A1A;\n\t\t\t\t\twidth: 100%;\n\t\t\t\t\toutline: none;\n\t\t\t\t}\n\t\t\t\t.search-bar input::placeholder { color: #888888; }\n\t\t\t\t.provider-tabs {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tgap: 8px;\n\t\t\t\t}\n\t\t\t\t.provider-tab {\n\t\t\t\t\tpadding: 8px 16px;\n\t\t\t\t\tborder-radius: 9999px;\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t\tborder: none;\n\t\t\t\t\tcursor: pointer;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t}\n\t\t\t\t.provider-tab.active {\n\t\t\t\t\tbackground-color: #0A0A0A;\n\t\t\t\t\tcolor: #FFFFFF;\n\t\t\t\t}\n\t\t\t\t.provider-tab.inactive {\n\t\t\t\t\tbackground-color: #F7F8FA;\n\t\t\t\t\tcolor: #666666;\n\t\t\t\t}\n\t\t\t\t.card {\n\t\t\t\t\tborder-radius: 12px;\n\t\t\t\t\tbackground-color: #F7F8FA;\n\t\t\t\t\tpadding: 16px;\n\t\t\t\t}\n\t\t\t\t.form-field {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tflex-direction: column;\n\t\t\t\t\tgap: 4px;\n\t\t\t\t}\n\t\t\t\t.form-field label {\n\t\t\t\t\tfont-size: 12px;\n\t\t\t\t\tcolor: #666666;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t}\n\t\t\t\t.form-field input {\n\t\t\t\t\tpadding: 8px 12px;\n\t\t\t\t\tborder-radius: 8px;\n\t\t\t\t\tborder: 1px solid #E5E7EB;\n\t\t\t\t\tfont-size: 14px;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t\tbackground-color: #FFFFFF;\n\t\t\t\t}\n\t\t\t\t.btn-primary {\n\t\t\t\t\tpadding: 10px 16px;\n\t\t\t\t\tborder-radius: 8px;\n\t\t\t\t\tbackground-color: #4A9FD8;\n\t\t\t\t\tcolor: #FFFFFF;\n\t\t\t\t\tborder: none;\n\t\t\t\t\tfont-size: 14px;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t\tcursor: pointer;\n\t\t\t\t\twidth: 100%;\n\t\t\t\t}\n\t\t\t\t.btn-primary:hover { background-color: #3B8EC8; }\n\t\t\t\t.toggle {\n\t\t\t\t\twidth: 44px;\n\t\t\t\t\theight: 24px;\n\t\t\t\t\tborder-radius: 12px;\n\t\t\t\t\tbackground-color: #10B981;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tcursor: pointer;\n\t\t\t\t}\n\t\t\t\t.toggle::after {\n\t\t\t\t\tcontent: '';\n\t\t\t\t\tposition: absolute;\n\t\t\t\t\twidth: 20px;\n\t\t\t\t\theight: 20px;\n\t\t\t\t\tborder-radius: 50%;\n\t\t\t\t\tbackground-color: #FFFFFF;\n\t\t\t\t\ttop: 2px;\n\t\t\t\t\tright: 2px;\n\t\t\t\t}\n\t\t\t\t.toggle.off {\n\t\t\t\t\tbackground-color: #E5E7EB;\n\t\t\t\t}\n\t\t\t\t.toggle.off::after {\n\t\t\t\t\tleft: 2px;\n\t\t\t\t\tright: auto;\n\t\t\t\t}\n\t\t\t\t.progress-bar {\n\t\t\t\t\twidth: 100%;\n\t\t\t\t\theight: 8px;\n\t\t\t\t\tborder-radius: 4px;\n\t\t\t\t\tbackground-color: #E5E7EB;\n\t\t\t\t\toverflow: hidden;\n\t\t\t\t}\n\t\t\t\t.progress-fill {\n\t\t\t\t\theight: 8px;\n\t\t\t\t\tborder-radius: 4px;\n\t\t\t\t\tbackground-color: #4A9FD8;\n\t\t\t\t}\n\t\t\t</style></head><body><div class=\"app-container\"><div class=\"status-bar\"><span>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap\" rel=\"stylesheet\"><script src=\"https://unpkg.com/htmx.org@2.0.4\"></script><style>\n\t\t\t\t* { margin: 0; padding: 0; box-sizing: border-box; }\n\t\t\t\tbody { font-family: 'Inter', sans-serif; background-color: #F7F8FA; color: #1A1A1A; }\n\t\t\t\t.app-container {\n\t\t\t\t\tmax-width: 390px;\n\t\t\t\t\tmargin: 0 auto;\n\t\t\t\t\tbackground-color: #FFFFFF;\n\t\t\t\t\tmin-height: 100vh;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tpadding-bottom: 80px;\n\t\t\t\t}\n\t\t\t\t.status-bar {\n\t\t\t\t\theight: 62px;\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tjustify-content: space-between;\n\t\t\t\t\tpadding: 0 24px;\n\t\t\t\t\tfont-size: 15px;\n\t\t\t\t\tfont-weight: 600;\n\t\t\t\t}\n\t\t\t\t.content {\n\t\t\t\t\tpadding: 0 20px;\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tflex-direction: column;\n\t\t\t\t\tgap: 24px;\n\t\t\t\t}\n\t\t\t\t.header-title {\n\t\t\t\t\tfont-size: 28px;\n\t\t\t\t\tfont-weight: 700;\n\t\t\t\t\tcolor: #1A1A1A;\n\t\t\t\t}\n\t\t\t\t.header-subtitle {\n\t\t\t\t\tfont-size: 14px;\n\t\t\t\t\tcolor: #666666;\n\t\t\t\t}\n\t\t\t\t.section-header {\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tfont-weight: 600;\n\t\t\t\t\tcolor: #888888;\n\t\t\t\t\tletter-spacing: 0.5px;\n\t\t\t\t\ttext-transform: uppercase;\n\t\t\t\t}\n\t\t\t\t.search-bar {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\talign-items: center;\n\t\t\t\t\tgap: 12px;\n\t\t\t\t\tpadding: 0 16px;\n\t\t\t\t\theight: 48px;\n\t\t\t\t\tborder-radius: 12px;\n\t\t\t\t\tbackground-color: #F7F8FA;\n\t\t\t\t\tborder: none;\n\t\t\t\t\twidth: 100%;\n\t\t\t\t}\n\t\t\t\t.search-bar input {\n\t\t\t\t\tborder: none;\n\t\t\t\t\tbackground: transparent;\n\t\t\t\t\tfont-size: 15px;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t\tcolor: #1A1A1A;\n\t\t\t\t\twidth: 100%;\n\t\t\t\t\toutline: none;\n\t\t\t\t}\n\t\t\t\t.search-bar input::placeholder { color: #888888; }\n\t\t\t\t.provider-tabs {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tgap: 8px;\n\t\t\t\t}\n\t\t\t\t.provider-tab {\n\t\t\t\t\tpadding: 8px 16px;\n\t\t\t\t\tborder-radius: 9999px;\n\t\t\t\t\tfont-size: 13px;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t\tborder: none;\n\t\t\t\t\tcursor: pointer;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t}\n\t\t\t\t.provider-tab.active {\n\t\t\t\t\tbackground-color: #0A0A0A;\n\t\t\t\t\tcolor: #FFFFFF;\n\t\t\t\t}\n\t\t\t\t.provider-tab.inactive {\n\t\t\t\t\tbackground-color: #F7F8FA;\n\t\t\t\t\tcolor: #666666;\n\t\t\t\t}\n\t\t\t\t.card {\n\t\t\t\t\tborder-radius: 12px;\n\t\t\t\t\tbackground-color: #F7F8FA;\n\t\t\t\t\tpadding: 16px;\n\t\t\t\t}\n\t\t\t\t.form-field {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tflex-direction: column;\n\t\t\t\t\tgap: 4px;\n\t\t\t\t}\n\t\t\t\t.form-field label {\n\t\t\t\t\tfont-size: 12px;\n\t\t\t\t\tcolor: #666666;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t}\n\t\t\t\t.form-field input {\n\t\t\t\t\tpadding: 8px 12px;\n\t\t\t\t\tborder-radius: 8px;\n\t\t\t\t\tborder: 1px solid #E5E7EB;\n\t\t\t\t\tfont-size: 14px;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t\tbackground-color: #FFFFFF;\n\t\t\t\t}\n\t\t\t\t.btn-primary {\n\t\t\t\t\tpadding: 10px 16px;\n\t\t\t\t\tborder-radius: 8px;\n\t\t\t\t\tbackground-color: #4A9FD8;\n\t\t\t\t\tcolor: #FFFFFF;\n\t\t\t\t\tborder: none;\n\t\t\t\t\tfont-size: 14px;\n\t\t\t\t\tfont-weight: 500;\n\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t\tcursor: pointer;\n\t\t\t\t\twidth: 100%;\n\t\t\t\t}\n\t\t\t\t.btn-primary:hover { background-color: #3B8EC8; }\n\t\t\t\t.toggle {\n\t\t\t\t\twidth: 44px;\n\t\t\t\t\theight: 24px;\n\t\t\t\t\tborder-radius: 12px;\n\t\t\t\t\tbackground-color: #10B981;\n\t\t\t\t\tposition: relative;\n\t\t\t\t\tcursor: pointer;\n\t\t\t\t}\n\t\t\t\t.toggle::after {\n\t\t\t\t\tcontent: '';\n\t\t\t\t\tposition: absolute;\n\t\t\t\t\twidth: 20px;\n\t\t\t\t\theight: 20px;\n\t\t\t\t\tborder-radius: 50%;\n\t\t\t\t\tbackground-color: #FFFFFF;\n\t\t\t\t\ttop: 2px;\n\t\t\t\t\tright: 2px;\n\t\t\t\t}\n\t\t\t\t.toggle.off {\n\t\t\t\t\tbackground-color: #E5E7EB;\n\t\t\t\t}\n\t\t\t\t.toggle.off::after {\n\t\t\t\t\tleft: 2px;\n\t\t\t\t\tright: auto;\n\t\t\t\t}\n\t\t\t\t.progress-bar {\n\t\t\t\t\twidth: 100%;\n\t\t\t\t\theight: 8px;\n\t\t\t\t\tborder-radius: 4px;\n\t\t\t\t\tbackground-color: #E5E7EB;\n\t\t\t\t\toverflow: hidden;\n\t\t\t\t}\n\t\t\t\t.progress-fill {\n\t\t\t\t\theight: 8px;\n\t\t\t\t\tborder-radius: 4px;\n\t\t\t\t\tbackground-color: #4A9FD8;\n\t\t\t\t}\n\t\t\t</style></head><body><div class=\"app-container\"><div class=\"status-bar\"><span>mellow</span></div><div class=\"content\"><div style=\"display:flex; flex-direction:column; gap:4px;\"><h1 class=\"header-title\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%02d:%02d", 9, 41))
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 178, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 180, Col: 38}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</span> <span>85%</span></div><div class=\"content\"><div style=\"display:flex; flex-direction:column; gap:4px;\"><h1 class=\"header-title\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</h1><p class=\"header-subtitle\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(title)
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(subtitle)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 183, Col: 38}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 181, Col: 43}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</h1><p class=\"header-subtitle\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(subtitle)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/layout.templ`, Line: 184, Col: 43}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</p></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</p></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -91,7 +76,7 @@ func Layout(activeTab Tab, title, subtitle string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -99,7 +84,7 @@ func Layout(activeTab Tab, title, subtitle string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

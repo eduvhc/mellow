@@ -60,14 +60,14 @@ type searchResponse struct {
 }
 
 type searchResultResponse struct {
-	Files []searchFile `json:"files"`
+	Username string       `json:"username"`
+	Files    []searchFile `json:"files"`
 }
 
 type searchFile struct {
-	Filename   string `json:"filename"`
-	Size       int64  `json:"size"`
-	Username   string `json:"username"`
-	Path       string `json:"path"`
+	Filename string `json:"filename"`
+	Size     int64  `json:"size"`
+	Path     string `json:"path"`
 }
 
 type transferResponse struct {
@@ -167,13 +167,13 @@ func (c *Client) parseResults(sr searchResponse) ([]provider.SearchResult, error
 		for _, f := range r.Files {
 			q := guessQuality(f.Filename)
 			results = append(results, provider.SearchResult{
-				ID:       f.Username + "/" + f.Filename,
+				ID:       r.Username + "/" + f.Filename,
 				Filename: f.Filename,
 				FileSize: f.Size,
 				Quality:  q,
 				Source:   Name,
 				Path:     f.Path,
-				Metadata: map[string]any{"username": f.Username},
+				Metadata: map[string]any{"username": r.Username},
 			})
 		}
 	}

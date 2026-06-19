@@ -1,7 +1,5 @@
 package templates
 
-import "fmt"
-
 templ Layout(activeTab Tab, title, subtitle string) {
 	<!DOCTYPE html>
 	<html lang="en">
@@ -12,7 +10,7 @@ templ Layout(activeTab Tab, title, subtitle string) {
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-			<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshBBF6rxB+myuH9TwrWMLgCE1J8d9wH7nT8jLO9n5yTFP5K5n5yTFP5" crossorigin="anonymous"></script>
+			<script src="https://unpkg.com/htmx.org@2.0.4"></script>
 			<style>
 				* { margin: 0; padding: 0; box-sizing: border-box; }
 				body { font-family: 'Inter', sans-serif; background-color: #F7F8FA; color: #1A1A1A; }
@@ -175,8 +173,7 @@ templ Layout(activeTab Tab, title, subtitle string) {
 		<body>
 			<div class="app-container">
 				<div class="status-bar">
-					<span>{ fmt.Sprintf("%02d:%02d", 9, 41) }</span>
-					<span>85%</span>
+					<span>mellow</span>
 				</div>
 				<div class="content">
 					<div style="display:flex; flex-direction:column; gap:4px;">

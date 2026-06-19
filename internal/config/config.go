@@ -28,9 +28,10 @@ type ProviderConfig struct {
 }
 
 type NavidromeConfig struct {
-	BaseURL  string `yaml:"base_url"`
-	Username string `yaml:"username"`
-	Password string `yaml:"password"`
+	BaseURL   string `yaml:"base_url"`
+	Username  string `yaml:"username"`
+	Password  string `yaml:"password"`
+	MusicPath string `yaml:"music_path"`
 }
 
 func Load(path string) (*Config, error) {

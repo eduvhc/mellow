@@ -3,3 +3,4 @@ mellow.db
 mellow.db-wal
 mellow.db-shm
 *.db
+mellow.local.yaml

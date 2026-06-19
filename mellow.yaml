@@ -16,3 +16,4 @@ navidrome:
   base_url: "http://localhost:4533"
   username: "your_username"
   password: "your_password"
+  music_path: "/music"
