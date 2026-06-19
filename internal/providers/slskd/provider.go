@@ -38,6 +38,23 @@ func New(cfg Config) *Client {
 
 func (c *Client) Name() string { return Name }
 
+func (c *Client) Ping(ctx context.Context) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.cfg.Host+"/api/v0/application", nil)
+	if err != nil {
+		return err
+	}
+	req.Header.Set("X-API-Key", c.cfg.APIKey)
+	resp, err := c.http.Do(req)
+	if err != nil {
+		return err
+	}
+	resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("slskd returned %s", resp.Status)
+	}
+	return nil
+}
+
 func (c *Client) Config() provider.ConfigSchema {
 	return provider.ConfigSchema{
 		Fields: []provider.ConfigField{

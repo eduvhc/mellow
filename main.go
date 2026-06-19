@@ -87,6 +87,8 @@ func main() {
 	mux.HandleFunc("GET /api/downloads/active", handlers.DownloadsActiveAPI)
 	mux.HandleFunc("GET /api/stats", handlers.StorageAPI)
 	mux.HandleFunc("GET /api/storage", handlers.StorageAPI)
+	mux.HandleFunc("POST /api/navidrome/ping", handlers.TestNavidromeAPI)
+	mux.HandleFunc("POST /api/provider/{provider}/ping", handlers.TestProviderAPI)
 	mux.HandleFunc("GET /api/navidrome/artists", handleGetArtists(nd))
 	mux.HandleFunc("GET /api/navidrome/artist/{id}", handleGetArtist(nd))
 	mux.HandleFunc("GET /api/navidrome/album/{id}", handleGetAlbum(nd))

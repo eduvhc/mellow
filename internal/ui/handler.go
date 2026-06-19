@@ -309,6 +309,36 @@ func (h *Handler) DownloadsActiveAPI(w http.ResponseWriter, r *http.Request) {
 	Render(w, r, templates.ActiveDownloadsList(active))
 }
 
+func (h *Handler) TestNavidromeAPI(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	if h.nd == nil {
+		Render(w, r, templates.ConnectionTestResult("navidrome", false, "not configured"))
+		return
+	}
+	err := h.nd.Ping(r.Context())
+	if err != nil {
+		Render(w, r, templates.ConnectionTestResult("navidrome", false, err.Error()))
+		return
+	}
+	Render(w, r, templates.ConnectionTestResult("navidrome", true, ""))
+}
+
+func (h *Handler) TestProviderAPI(w http.ResponseWriter, r *http.Request) {
+	name := r.PathValue("provider")
+	p, ok := h.registry.Get(name)
+	if !ok {
+		Render(w, r, templates.ConnectionTestResult(name, false, "provider not found"))
+		return
+	}
+	w.Header().Set("Content-Type", "text/html")
+	err := p.Ping(r.Context())
+	if err != nil {
+		Render(w, r, templates.ConnectionTestResult(name, false, err.Error()))
+		return
+	}
+	Render(w, r, templates.ConnectionTestResult(name, true, ""))
+}
+
 func (h *Handler) StorageAPI(w http.ResponseWriter, r *http.Request) {
 	used, total, _ := diskUsage(h.cfg.Navidrome.MusicPath)
 	w.Header().Set("Content-Type", "application/json")
