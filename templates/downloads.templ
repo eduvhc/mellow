@@ -16,6 +16,9 @@ templ DownloadsPage(data DownloadsPageData) {
 		<div style="display:flex; flex-direction:column; gap:12px;">
 			<span class="section-header">Active</span>
 			<div id="active-downloads" style="display:flex; flex-direction:column; gap:12px;" hx-get="/api/downloads/active" hx-trigger="every 5s" hx-swap="innerHTML">
+				if len(data.Active) == 0 {
+					<span style="font-family:Inter,sans-serif; font-size:14px; color:#888888;">No active downloads</span>
+				}
 				for _, dl := range data.Active {
 					@DownloadCard(
 						dl.Result.Filename,
@@ -34,6 +37,13 @@ templ DownloadsPage(data DownloadsPageData) {
 		<div style="display:flex; flex-direction:column; gap:12px;">
 			<span class="section-header">Completed Today</span>
 			<div style="display:flex; flex-direction:column; gap:12px;">
+				if len(data.Completed) == 0 {
+					@emptyState(
+						`<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>`,
+						"No downloads yet",
+						"Hit the download button on a Soulseek result to start.",
+					)
+				}
 				for _, dl := range data.Completed {
 					@DownloadCard(
 						dl.Result.Filename,

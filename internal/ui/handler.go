@@ -56,12 +56,9 @@ func (h *Handler) SearchPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) LibraryPage(w http.ResponseWriter, r *http.Request) {
-    data := templates.LibraryPageData{
-        // Default to 0; populate from Navidrome when available
-        ArtistsCount: 0,
-        AlbumsCount:  0,
-        SongsCount:   0,
-    }
+	data := templates.LibraryPageData{
+		NavidromeConnected: h.nd != nil,
+	}
 
 	if h.nd != nil {
 		artists, err := h.nd.GetArtists(r.Context())

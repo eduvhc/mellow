@@ -1,0 +1,15 @@
+package templates
+
+templ emptyState(iconPath, title, description string) {
+	<div style="display:flex; flex-direction:column; align-items:center; gap:12px; padding:32px 0; text-align:center;">
+		<div style="width:48px; height:48px; border-radius:12px; background-color:#F7F8FA; display:flex; align-items:center; justify-content:center;">
+			<svg style="width:24px; height:24px; color:#888888;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+				@templ.Raw(iconPath)
+			</svg>
+		</div>
+		<div style="display:flex; flex-direction:column; gap:4px;">
+			<span style="font-family:Inter,sans-serif; font-size:15px; font-weight:600; color:#1A1A1A;">{ title }</span>
+			<span style="font-family:Inter,sans-serif; font-size:13px; color:#888888; max-width:260px;">{ description }</span>
+		</div>
+	</div>
+}

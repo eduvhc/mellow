@@ -15,11 +15,12 @@ import (
 )
 
 type LibraryPageData struct {
-	ArtistsCount   int
-	AlbumsCount    int
-	SongsCount     int
-	RecentlyPlayed []navidrome.Child
-	AlbumResults   []navidrome.Child
+	NavidromeConnected bool
+	ArtistsCount       int
+	AlbumsCount        int
+	SongsCount         int
+	RecentlyPlayed     []navidrome.Child
+	AlbumResults       []navidrome.Child
 }
 
 func LibraryPage(data LibraryPageData) templ.Component {
@@ -87,6 +88,29 @@ func LibraryPage(data LibraryPageData) templ.Component {
 					}
 				}
 				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if !data.NavidromeConnected {
+				templ_7745c5c3_Err = emptyState(
+					`<path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>`,
+					"Navidrome unreachable",
+					"Check the connection in Settings.",
+				).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			} else if data.ArtistsCount == 0 && data.AlbumsCount == 0 {
+				templ_7745c5c3_Err = emptyState(
+					`<path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>`,
+					"No music yet",
+					"Search for albums on Soulseek and download them — they'll appear here after the next scan.",
+				).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

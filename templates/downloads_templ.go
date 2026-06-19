@@ -56,6 +56,12 @@ func DownloadsPage(data DownloadsPageData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
+			if len(data.Active) == 0 {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span style=\"font-family:Inter,sans-serif; font-size:14px; color:#888888;\">No active downloads</span> ")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
 			for _, dl := range data.Active {
 				templ_7745c5c3_Err = DownloadCard(
 					dl.Result.Filename,
@@ -72,9 +78,19 @@ func DownloadsPage(data DownloadsPageData) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div><div style=\"display:flex; flex-direction:column; gap:12px;\"><span class=\"section-header\">Completed Today</span><div style=\"display:flex; flex-direction:column; gap:12px;\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div><div style=\"display:flex; flex-direction:column; gap:12px;\"><span class=\"section-header\">Completed Today</span><div style=\"display:flex; flex-direction:column; gap:12px;\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
+			}
+			if len(data.Completed) == 0 {
+				templ_7745c5c3_Err = emptyState(
+					`<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>`,
+					"No downloads yet",
+					"Hit the download button on a Soulseek result to start.",
+				).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
 			}
 			for _, dl := range data.Completed {
 				templ_7745c5c3_Err = DownloadCard(
@@ -92,7 +108,7 @@ func DownloadsPage(data DownloadsPageData) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
